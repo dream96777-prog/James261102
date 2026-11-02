@@ -1,0 +1,351 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --text: #22251f;
+  --muted: #62675c;
+  --border: #dcdbd2;
+  --accent: #2c6e49;
+  --accent-text: #ffffff;
+  --track: #e4e3da;
+  --warn-bg: #fbf3df;
+  --warn-border: #e5d3a1;
+  --warn-text: #6b4e00;
+  --toast-bg: #22251f;
+  --toast-text: #f6f5f1;
+  --toast-action: #9fdcb8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171916;
+    --surface: #21241f;
+    --text: #e9eae4;
+    --muted: #a3a89b;
+    --border: #3a3e36;
+    --accent: #6fc594;
+    --accent-text: #10210f;
+    --track: #33372f;
+    --warn-bg: #2d2717;
+    --warn-border: #55491f;
+    --warn-text: #ecd48c;
+    --toast-bg: #e9eae4;
+    --toast-text: #171916;
+    --toast-action: #1f6340;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 48px 16px 96px;
+}
+
+.banner {
+  padding: 10px 16px;
+  background: var(--warn-bg);
+  border-bottom: 1px solid var(--warn-border);
+  color: var(--warn-text);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* 헤더 */
+.header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.date {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.progress-text {
+  flex: none;
+  color: var(--muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 입력과 버튼 */
+.todo-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.text-input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.text-input::placeholder {
+  color: var(--muted);
+}
+
+.btn {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: var(--muted);
+}
+
+.btn-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.btn-small {
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.icon-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--track);
+  color: var(--text);
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 목록 */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo,
+.overdue-item {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  border-bottom: 1px solid var(--border);
+}
+
+.check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.todo-check {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.todo-text {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 4px;
+  overflow-wrap: anywhere;
+}
+
+.todo.done .todo-text {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.edit-form {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0;
+}
+
+.empty {
+  margin: 0;
+  padding: 40px 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* 지난 할일 */
+.overdue {
+  margin-bottom: 24px;
+  padding: 12px;
+  border: 1px solid var(--warn-border);
+  border-radius: 8px;
+  background: var(--warn-bg);
+}
+
+.overdue-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+h2 {
+  margin: 0;
+  color: var(--warn-text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.overdue-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.overdue-item {
+  gap: 4px;
+  border-bottom-color: var(--warn-border);
+}
+
+.overdue-item:last-child {
+  border-bottom: 0;
+}
+
+.overdue-date {
+  flex: none;
+  color: var(--warn-text);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 토스트 */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 4px 8px 4px 16px;
+  border-radius: 8px;
+  background: var(--toast-bg);
+  color: var(--toast-text);
+  transform: translateX(-50%);
+}
+
+.toast-undo {
+  flex: none;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: var(--toast-action);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 599px) {
+  .page {
+    padding-top: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill {
+    transition: none;
+  }
+}

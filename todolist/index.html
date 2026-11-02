@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오늘의 할일</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="banner" class="banner" role="alert" hidden></div>
+
+  <main class="page">
+    <header class="header">
+      <h1>오늘의 할일</h1>
+      <time id="today-date" class="date"></time>
+      <div id="progress" class="progress" hidden>
+        <div id="progress-bar" class="progress-bar" role="progressbar" aria-label="오늘의 진행률" aria-valuemin="0" aria-valuemax="100">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="progress-text" class="progress-text"></span>
+      </div>
+    </header>
+
+    <form id="todo-form" class="todo-form">
+      <input id="todo-input" class="text-input" type="text" maxlength="200" placeholder="할 일을 입력하세요" aria-label="새 할일" autocomplete="off" autofocus>
+      <button class="btn btn-primary" type="submit">추가</button>
+    </form>
+
+    <section id="overdue" class="overdue" aria-labelledby="overdue-title" hidden>
+      <div class="overdue-header">
+        <h2 id="overdue-title"></h2>
+        <div class="overdue-actions">
+          <button class="btn btn-small" type="button" data-action="carry-all">모두 가져오기</button>
+          <button class="btn btn-small" type="button" data-action="delete-overdue">모두 삭제</button>
+        </div>
+      </div>
+      <ul id="overdue-list" class="list"></ul>
+    </section>
+
+    <ul id="todo-list" class="list" aria-label="오늘의 할일 목록"></ul>
+    <p id="empty" class="empty" hidden>오늘 할 일을 적어보세요</p>
+
+    <div class="footer">
+      <button id="clear-completed" class="btn btn-small" type="button" data-action="clear-completed" hidden>완료 항목 지우기</button>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status" hidden>
+    <span id="toast-message"></span>
+    <button class="toast-undo" type="button" data-action="undo">실행 취소</button>
+  </div>
+
+  <template id="todo-view-template">
+    <label class="check"><input class="todo-check" type="checkbox"></label>
+    <span class="todo-text"></span>
+    <button class="icon-btn edit-btn" type="button" data-action="edit">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"/></svg>
+    </button>
+    <button class="icon-btn delete-btn" type="button" data-action="delete">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </template>
+
+  <template id="todo-edit-template">
+    <form class="edit-form">
+      <input class="text-input edit-input" type="text" maxlength="200" autocomplete="off">
+    </form>
+  </template>
+
+  <template id="overdue-item-template">
+    <span class="overdue-date"></span>
+    <span class="todo-text"></span>
+    <button class="btn btn-small carry-btn" type="button" data-action="carry">가져오기</button>
+    <button class="icon-btn delete-btn" type="button" data-action="delete">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
