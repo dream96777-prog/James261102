@@ -1,8 +1,11 @@
 import { PencilLineIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 
-import { buttonVariants } from "@/components/ui/button";
+import { logoutAction } from "@/app/actions";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { isAdmin } from "@/lib/session";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,10 +22,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="text-base font-semibold tracking-tight">
               DemoBoard
             </Link>
-            <Link href="/posts/new" className={buttonVariants({ size: "lg" })}>
-              <PencilLineIcon />
-              글쓰기
-            </Link>
+            <Suspense>
+              <HeaderActions />
+            </Suspense>
           </div>
         </header>
         <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-6 sm:py-8">
@@ -30,5 +32,32 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
       </body>
     </html>
+  );
+}
+
+async function HeaderActions() {
+  if (!(await isAdmin())) {
+    return (
+      <Link
+        href="/login"
+        className={buttonVariants({ variant: "outline", size: "lg" })}
+      >
+        로그인
+      </Link>
+    );
+  }
+
+  return (
+    <div className="flex gap-2">
+      <form action={logoutAction}>
+        <Button type="submit" variant="outline" size="lg">
+          로그아웃
+        </Button>
+      </form>
+      <Link href="/posts/new" className={buttonVariants({ size: "lg" })}>
+        <PencilLineIcon />
+        글쓰기
+      </Link>
+    </div>
   );
 }

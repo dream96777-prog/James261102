@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
 
@@ -8,6 +8,7 @@ import { PostForm } from "@/components/post-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { getPost } from "@/lib/posts";
 import { parsePostId } from "@/lib/post-id";
+import { isAdmin } from "@/lib/session";
 
 export const metadata: Metadata = { title: "글 수정" };
 
@@ -35,6 +36,7 @@ export default function EditPostPage({
 async function EditForm({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   await connection();
+  if (!(await isAdmin())) redirect("/login");
 
   const postId = parsePostId(id);
   const post = postId === undefined ? undefined : await getPost(postId);

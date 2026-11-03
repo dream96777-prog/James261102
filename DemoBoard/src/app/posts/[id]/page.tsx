@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { formatDate } from "@/lib/format";
 import { getPost } from "@/lib/posts";
 import { parsePostId } from "@/lib/post-id";
+import { isAdmin } from "@/lib/session";
 
 export const metadata: Metadata = { title: "글 보기" };
 
@@ -31,6 +32,7 @@ async function PostDetail({ params }: { params: Promise<{ id: string }> }) {
   const postId = parsePostId(id);
   const post = postId === undefined ? undefined : await getPost(postId);
   if (!post) notFound();
+  const admin = await isAdmin();
 
   return (
     <div className="flex flex-col gap-4">
@@ -62,16 +64,18 @@ async function PostDetail({ params }: { params: Promise<{ id: string }> }) {
           <ArrowLeftIcon />
           목록
         </Link>
-        <div className="flex gap-2">
-          <Link
-            href={`/posts/${post.id}/edit`}
-            className={buttonVariants({ variant: "outline", size: "lg" })}
-          >
-            <PencilIcon />
-            수정
-          </Link>
-          <DeletePostButton id={post.id} />
-        </div>
+        {admin && (
+          <div className="flex gap-2">
+            <Link
+              href={`/posts/${post.id}/edit`}
+              className={buttonVariants({ variant: "outline", size: "lg" })}
+            >
+              <PencilIcon />
+              수정
+            </Link>
+            <DeletePostButton id={post.id} />
+          </div>
+        )}
       </div>
     </div>
   );

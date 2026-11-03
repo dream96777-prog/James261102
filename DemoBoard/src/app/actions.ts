@@ -5,12 +5,25 @@ import { redirect } from "next/navigation";
 
 import * as posts from "@/lib/posts";
 import type { PostInput } from "@/lib/posts";
+import {
+  createSession,
+  deleteSession,
+  isAdmin,
+  verifyAdminPassword,
+} from "@/lib/session";
 
 export type PostFormState = {
   values?: PostInput;
   errors?: Partial<Record<keyof PostInput, string>>;
   message?: string;
 };
+
+export type LoginFormState = {
+  message?: string;
+};
+
+// 입력한 내용을 잃지 않도록 값을 돌려주고, 다른 탭에서 로그인한 뒤 다시 저장하게 한다.
+const LOGIN_REQUIRED = "로그인이 필요합니다. 다른 탭에서 로그인한 뒤 다시 저장해 주세요.";
 
 const LIMITS = { title: 100, author: 30, content: 5000 } as const;
 
@@ -44,11 +57,31 @@ function parseForm(formData: FormData): {
   return { values, errors };
 }
 
+export async function loginAction(
+  _prev: LoginFormState,
+  formData: FormData,
+): Promise<LoginFormState> {
+  if (!verifyAdminPassword(String(formData.get("password") ?? ""))) {
+    return { message: "비밀번호가 올바르지 않습니다." };
+  }
+
+  await createSession();
+  revalidatePath("/", "layout");
+  redirect("/");
+}
+
+export async function logoutAction() {
+  await deleteSession();
+  revalidatePath("/", "layout");
+  redirect("/");
+}
+
 export async function createPostAction(
   _prev: PostFormState,
   formData: FormData,
 ): Promise<PostFormState> {
   const { values, errors } = parseForm(formData);
+  if (!(await isAdmin())) return { values, message: LOGIN_REQUIRED };
   if (errors && Object.keys(errors).length > 0) return { values, errors };
 
   const post = await posts.createPost(values);
@@ -62,6 +95,7 @@ export async function updatePostAction(
   formData: FormData,
 ): Promise<PostFormState> {
   const { values, errors } = parseForm(formData);
+  if (!(await isAdmin())) return { values, message: LOGIN_REQUIRED };
   if (errors && Object.keys(errors).length > 0) return { values, errors };
 
   const post = await posts.updatePost(id, values);
@@ -72,6 +106,8 @@ export async function updatePostAction(
 }
 
 export async function deletePostAction(id: number) {
+  if (!(await isAdmin())) redirect("/login");
+
   await posts.deletePost(id);
   revalidatePath("/", "layout");
   redirect("/");
