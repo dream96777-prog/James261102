@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[이름] | Python · HTML5 앱 개발자</title>
+  <meta name="description" content="Python과 HTML5 앱 개발을 주력으로 하는 개발자의 프로필과 프로젝트를 소개합니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[이름] | Python · HTML5 앱 개발자">
+  <meta property="og:description" content="Python과 HTML5 앱 개발을 주력으로 하는 개발자의 프로필과 프로젝트를 소개합니다.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <script>
+    try {
+      var savedTheme = localStorage.getItem('theme');
+      if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="주요 메뉴">
+      <a class="brand" href="#top">[이름]</a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#about">소개</a></li>
+        <li><a href="#skills">기술</a></li>
+        <li><a href="#projects">프로젝트</a></li>
+        <li><a href="#contact">연락처</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="다크 모드 전환">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3Z"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+        <button class="icon-button nav-toggle" id="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">안녕하세요, [이름]입니다</p>
+          <h1>Python과 HTML5로<br>앱을 만듭니다</h1>
+          <p class="lead">[한 줄 소개를 입력하세요]</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">연락하기</a>
+            <a class="button button-secondary" href="#projects">프로젝트 보기</a>
+          </div>
+        </div>
+        <pre class="code-panel" tabindex="0" aria-label="개발자 정보 코드 예시"><code><span class="code-comment"># profile.py</span>
+developer = {
+    <span class="code-string">"focus"</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"HTML5 앱 개발"</span>],
+    <span class="code-string">"email"</span>: <span class="code-string">"dream96777@gmail.com"</span>,
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container narrow">
+        <h2>소개</h2>
+        <p>[자기소개 글을 입력하세요. 어떤 개발자인지, 무엇을 만들어 왔는지 적어 주세요.]</p>
+        <h3>일하는 방식</h3>
+        <p>[일하는 방식이나 협업할 때 중요하게 생각하는 점을 입력하세요.]</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <h2>기술 스택</h2>
+        <div class="focus-grid">
+          <article class="focus-card">
+            <p class="card-label">주력 분야</p>
+            <h3>Python</h3>
+            <p>[Python으로 해 온 개발 내용을 입력하세요.]</p>
+          </article>
+          <article class="focus-card">
+            <p class="card-label">주력 분야</p>
+            <h3>HTML5 앱 개발</h3>
+            <p>[HTML5로 해 온 앱 개발 내용을 입력하세요.]</p>
+          </article>
+        </div>
+        <dl class="skill-list">
+          <div><dt>언어</dt><dd>[보유 기술 입력]</dd></div>
+          <div><dt>프레임워크</dt><dd>[보유 기술 입력]</dd></div>
+          <div><dt>도구</dt><dd>[보유 기술 입력]</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <h2>프로젝트</h2>
+        <div class="filters" id="project-filters" role="group" aria-label="기술별 프로젝트 필터"></div>
+        <div class="project-grid" id="project-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="contact">
+      <div class="container narrow contact">
+        <h2>연락처</h2>
+        <p>프로젝트 의뢰, 채용, 협업 제안은 이메일로 보내 주세요.</p>
+        <a class="contact-email" href="mailto:dream96777@gmail.com">dream96777@gmail.com</a>
+        <div class="hero-actions">
+          <a class="button button-primary" href="mailto:dream96777@gmail.com">이메일 보내기</a>
+          <button class="button button-secondary" id="copy-email" type="button" data-email="dream96777@gmail.com">주소 복사</button>
+        </div>
+        <p class="copy-status" id="copy-status" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>© 2026 [이름]. All rights reserved.</p>
+      <p>[GitHub 등 외부 프로필 링크 입력]</p>
+    </div>
+  </footer>
+</body>
+</html>

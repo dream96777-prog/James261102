@@ -1,0 +1,26 @@
+[
+  {
+    "title": "[샘플] Python 프로젝트",
+    "description": "실제 프로젝트 설명으로 바꿔 주세요.",
+    "tech": ["Python"],
+    "image": "assets/images/project-placeholder.svg",
+    "imageAlt": "프로젝트 이미지 자리 표시",
+    "link": ""
+  },
+  {
+    "title": "[샘플] HTML5 앱 프로젝트",
+    "description": "실제 프로젝트 설명으로 바꿔 주세요.",
+    "tech": ["HTML5"],
+    "image": "assets/images/project-placeholder.svg",
+    "imageAlt": "프로젝트 이미지 자리 표시",
+    "link": ""
+  },
+  {
+    "title": "[샘플] Python + HTML5 프로젝트",
+    "description": "실제 프로젝트 설명으로 바꿔 주세요.",
+    "tech": ["Python", "HTML5"],
+    "image": "assets/images/project-placeholder.svg",
+    "imageAlt": "프로젝트 이미지 자리 표시",
+    "link": ""
+  }
+]

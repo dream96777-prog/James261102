@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="프로젝트 이미지 자리 표시">
+  <rect width="640" height="360" fill="#14202b"/>
+  <g fill="none" stroke="#5eead4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M270 130l-50 50 50 50"/>
+    <path d="M370 130l50 50-50 50"/>
+  </g>
+</svg>
